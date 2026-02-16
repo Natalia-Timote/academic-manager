@@ -6,6 +6,7 @@ use Alura\Pdo\Domain\Model\Student;
 use Alura\Pdo\Domain\Repository\StudentRepository;
 use DateTimeImmutable;
 use PDO;
+use RuntimeException;
 
 class PdoStudentRepository implements StudentRepository
 {
@@ -34,7 +35,7 @@ class PdoStudentRepository implements StudentRepository
 
     public function hydrateStudentList($statement): array
     {
-        $studentDataList = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $studentDataList = $statement->fetchAll();
         $studentList = [];
 
         foreach ($studentDataList as $studentData) {

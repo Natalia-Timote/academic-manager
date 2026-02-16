@@ -8,7 +8,7 @@ use Alura\Pdo\Infrastructure\Persistence\ConnectionCreator;
 $pdo = ConnectionCreator::createConnection();
 
 $statement = $pdo->query('SELECT * FROM students;');
-$studentDataList = $statement->fetchAll(PDO::FETCH_ASSOC);
+$studentDataList = $statement->fetchAll();
 $studentList = [];
 
 foreach ($studentDataList as $studentData) {
