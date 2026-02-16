@@ -4,18 +4,16 @@ namespace Alura\Pdo\Infrastructure\Repository;
 
 use Alura\Pdo\Domain\Model\Student;
 use Alura\Pdo\Domain\Repository\StudentRepository;
-use Alura\Pdo\Infrastructure\Persistence\ConnectionCreator;
 use DateTimeImmutable;
 use PDO;
-use PDOStatement;
 
 class PdoStudentRepository implements StudentRepository
 {
     private PDO $connection;
 
-    public function __construct()
+    public function __construct(PDO $connection)
     {
-        $this->connection = ConnectionCreator::createConnection();
+        $this->connection = $connection;
     }
 
     public function allStudents(): array
@@ -64,8 +62,7 @@ class PdoStudentRepository implements StudentRepository
 
         $success = $statement->execute([
             ':name' => $student->name(),
-            ':birth_date',
-            $student->birthDate()->format('Y-m-d')
+            ':birth_date' => $student->birthDate()->format('Y-m-d')
         ]);
 
         if ($success) {
