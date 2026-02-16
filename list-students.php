@@ -4,8 +4,7 @@ require_once 'vendor/autoload.php';
 
 use Alura\Pdo\Domain\Model\Student;
 
-$databasePath = __DIR__ . '/database.sqlite';
-$pdo = new PDO('sqlite:' . $databasePath);
+$pdo = ConnectionCreator::createConnection();
 
 $statement = $pdo->query('SELECT * FROM students;');
 $studentDataList = $statement->fetchAll(PDO::FETCH_ASSOC);
