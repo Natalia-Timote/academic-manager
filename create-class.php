@@ -27,4 +27,4 @@ $anotherStudent = new Student(
 
 $studentRepository->save($anotherStudent);
 
-$connection->commit();
+$connection->rollBack();
